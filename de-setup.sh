@@ -1,4 +1,4 @@
-sss/bin/bash
+#!/bin/bash
 
 
 
@@ -14,32 +14,8 @@ then
 	read password
 	useradd -m -g wheel $user -p $password
 	echo "added user $user with group wheel"
-
-echo " %wheel ALL=(ALL) NOPASSWD: ALL " >> /etc/sudoers
-
-
-
-
-
-
-
-
-
-
-echo "Do you want to setup wifi"
-echo "(y/Y)"
-read result
-
-if (( "$result" == y || "$result" == Y ))
-then
-	sudo systemctl enable NetworkManager
-	echo "Enter the SSID of the network"
-	read ssid
-	echo "Enter the password of $ssid"
-	read password
-	nmcli device wifi connect $ssid password $password
-	echo "Wifi is connected, if there is any error please search online"
-
+fi
+sudo echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/nopwd
 
 
 sudo pacman -S xorg xorg-server xorg-xinitrc xorg-xrandr
@@ -60,8 +36,8 @@ else
 	cd ~/.config
 	echo "cding into ~/.config"
 
-
-echo "closing dwm"
+fi
+echo "cloning dwm"
 git clone https://github.com/aamodvarma/dwm
 
 echo "cloning dwblocks"
