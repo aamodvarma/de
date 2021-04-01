@@ -1,6 +1,7 @@
 #!/bin/bash
 
 
+sudo pacman -S base-devel vim
 
 echo "Do you want to add a user?"
 echo "(y/Y)"
