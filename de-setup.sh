@@ -3,23 +3,10 @@
 
 sudo pacman -S base-devel vim
 
-echo "Do you want to add a user?"
-echo "(y/Y)"
-read userc
-
-if (( "$userc" == y || "$userc" == Y ))
-then
-	echo "Enter username:"
-	read user
-	echo "Enter password for $user"
-	read password
-	useradd -m -g wheel $user -p $password
-	echo "added user $user with group wheel"
-fi
 sudo echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/nopwd
 
 
-sudo pacman -S xorg xorg-server xorg-xinitrc xorg-xrandr
+sudo pacman -S xorg xorg-server xorg-xinit xorg-xrandr libxinerama xorg-xauth
 
 echo "Installing xorg"
 
