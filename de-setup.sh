@@ -1,16 +1,17 @@
 #!/bin/bash
 
 
+sudo pacman -Syu
 sudo pacman -S base-devel vim
 
 sudo echo "%wheel ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/nopwd
 
 
-sudo pacman -S xorg xorg-server xorg-xinit xorg-xrandr libxinerama xorg-xauth
+sudo pacman -S xorg xorg-server xorg-xinit xorg-xrandr libxinerama xorg-xauth base-devel
 
 echo "Installing xorg"
 
-sudo pacman -S make gcc git
+sudo pacman -S make gcc git rofi
 
 echo "Installing make dependencies"
 
@@ -60,3 +61,13 @@ cd ~/dotfiles
 echo " Giving Executable to sym.sh"
 sudo chmod +x ./sym.sh
 ./sym.sh
+
+cd /opt
+sudo git clone https://aur.archlinux.org/yay.git
+sudo chown -R $(whoami) ./yay
+cd yay-git
+makepkg -si
+sudo yay -Syu
+
+
+xrdb ~/.Xresource
